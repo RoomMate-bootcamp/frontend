@@ -1,11 +1,10 @@
 import { ReactNode, useState } from "react";
-import { Button } from './ui/button';
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from './ui/sheet';
-import { Users, Settings, LogOut, Menu, Search } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Button } from "./ui/button";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "./ui/sheet";
+import { Users, Settings, LogOut, Menu, Search } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Layout({ children }: { children: ReactNode }) {
-
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
@@ -30,33 +29,39 @@ export default function Layout({ children }: { children: ReactNode }) {
             <SheetTitle>Меню</SheetTitle>
           </SheetHeader>
           <div className="mt-8 flex flex-col gap-4">
-            <Button
-              className="justify-start cursor-pointer"
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-              }}
-            >
-              <Search className="mr-2 h-5 w-5" />
-              Поиск
-            </Button>
-            <Button
-              className="justify-start cursor-pointer"
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-              }}
-            >
-              <Users className="mr-2 h-5 w-5" />
-              Совпадения
-            </Button>
-            <Button
-              className="justify-start cursor-pointer"
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-              }}
-            >
-              <Settings className="mr-2 h-5 w-5" />
-              Профиль
-            </Button>
+            <Link to="/">
+              <Button
+                className="justify-start cursor-pointer"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                }}
+              >
+                <Search className="mr-2 h-5 w-5" />
+                Поиск
+              </Button>
+            </Link>
+            <Link to="/matches">
+              <Button
+                className="justify-start cursor-pointer"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                }}
+              >
+                <Users className="mr-2 h-5 w-5" />
+                Совпадения
+              </Button>
+            </Link>
+            <Link to="/profile">
+              <Button
+                className="justify-start cursor-pointer"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                }}
+              >
+                <Settings className="mr-2 h-5 w-5" />
+                Профиль
+              </Button>
+            </Link>
             <Button
               variant="ghost"
               className="justify-start mt-auto cursor-pointer"
@@ -77,38 +82,33 @@ export default function Layout({ children }: { children: ReactNode }) {
           </div>
           <div className="flex flex-col gap-2">
             <Link to="/">
-              <Button 
-                className="justify-start cursor-pointer" 
-                >
+              <Button className="justify-start cursor-pointer">
                 <Search className="mr-2 h-5 w-5" />
                 Поиск
               </Button>
             </Link>
             <Link to="/matches">
-            <Button 
-              className="justify-start cursor-pointer" 
-              >
-              <Users className="mr-2 h-5 w-5" />
-              Совпадения
-            </Button>
+              <Button className="justify-start cursor-pointer">
+                <Users className="mr-2 h-5 w-5" />
+                Совпадения
+              </Button>
             </Link>
             <Link to="/profile">
-            <Button
-              className="justify-start cursor-pointer" 
-              >
-              <Settings className="mr-2 h-5 w-5" />
-              Профиль
-            </Button>
-              </Link>
+              <Button className="justify-start cursor-pointer">
+                <Settings className="mr-2 h-5 w-5" />
+                Профиль
+              </Button>
+            </Link>
           </div>
-          <Button variant="ghost" className="justify-start cursor-pointer mt-auto">
+          <Button
+            variant="ghost"
+            className="justify-start cursor-pointer mt-auto"
+          >
             <LogOut className="mr-2 h-5 w-5" />
             Выйти
           </Button>
         </div>
-        <div className="flex-1 p-4">
-          {children}
-        </div>
+        <div className="flex-1 p-4">{children}</div>
       </div>
     </div>
   );
