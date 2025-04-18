@@ -1,15 +1,25 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Home from './pages/Home';
-import RoommateMatcherApp from './roommate-matcher-app';
+import Search from '@/pages/Search';
+import Profile from '@/pages/Profile';
+import Matches from '@/pages/Matches';
+import LoginForm from '@/components/LoginForm';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Home />
+    element: <Search />,
   },
   {
-    path: '/roommate',
-    element: <RoommateMatcherApp />
+    path: '/matches',
+    element: <Matches />,
+  },
+  {
+    path: '/profile',
+    element: <Profile />,
+  },
+  {
+    path: '/login',
+    element: <LoginForm />,
   },
 ]);
 
