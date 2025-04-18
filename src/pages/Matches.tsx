@@ -60,7 +60,7 @@ export default function Matches() {
           {matchedUsers.length === 0 ? (
             <div className="text-center p-4 bg-gray-100 rounded-md">
               <p>У вас пока нет совпадений</p>
-              <p className="text-sm text-gray-500 mt-2">
+              <p className="text-base text-gray-500 mt-2">
                 Продолжайте искать, чтобы найти идеального соседа
               </p>
             </div>
@@ -81,7 +81,7 @@ export default function Matches() {
                         <AvatarFallback>{user.name.slice(0, 2)}</AvatarFallback>
                       </Avatar>
                       <div>
-                        <CardTitle className="text-base">{user.name}</CardTitle>
+                        <CardTitle className="text-lg">{user.name}</CardTitle>
                         <CardDescription className="text-xs">
                           {user.location}
                         </CardDescription>
@@ -128,7 +128,7 @@ export default function Matches() {
                   <h3 className="font-medium">
                     {mockUsers.find((u) => u.id === currentChat)?.name}
                   </h3>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-base text-gray-500">
                     {mockUsers.find((u) => u.id === currentChat)?.location}
                   </p>
                 </div>

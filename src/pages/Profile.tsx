@@ -290,12 +290,12 @@ export default function Profile() {
             <CardContent>
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-lg font-medium mb-2">О себе</h3>
+                  <h3 className="text-xl font-medium mb-2">О себе</h3>
                   <p className="text-gray-700">{profile.bio}</p>
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-medium mb-2">Интересы</h3>
+                  <h3 className="text-xl font-medium mb-2">Интересы</h3>
                   <div className="flex flex-wrap gap-2">
                     {profile.interests.map((interest, i) => (
                       <Badge key={i} variant="secondary">
@@ -307,7 +307,7 @@ export default function Profile() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <h3 className="text-lg font-medium mb-2">
+                    <h3 className="text-xl font-medium mb-2">
                       Жилищные предпочтения
                     </h3>
                     <div className="space-y-2">
@@ -325,7 +325,7 @@ export default function Profile() {
                   </div>
 
                   <div>
-                    <h3 className="text-lg font-medium mb-2">
+                    <h3 className="text-xl font-medium mb-2">
                       Личные привычки
                     </h3>
                     <div className="space-y-2">

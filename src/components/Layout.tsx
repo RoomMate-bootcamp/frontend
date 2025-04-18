@@ -8,7 +8,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
+    <div className="flex flex-col min-h-screen bg-gray-50 text-xl">
       <header className="md:hidden flex items-center justify-between p-4 bg-white border-b">
         <div className="flex items-center">
           <h1 className="text-xl font-bold">DormBuddy</h1>
@@ -78,7 +78,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         <div className="hidden md:flex flex-col w-64 border-r bg-white p-4">
           <div className="mb-8">
             <h1 className="text-2xl font-bold">DormBuddy</h1>
-            <p className="text-gray-500 text-sm">Найди идеального соседа</p>
+            <p className="text-gray-500 text-base">Найди идеального соседа</p>
           </div>
           <div className="flex flex-col gap-2">
             <Link to="/">

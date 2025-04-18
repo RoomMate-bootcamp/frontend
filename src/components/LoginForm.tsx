@@ -20,27 +20,27 @@
 //           <form className="space-y-4">
 //             {!isLogin && (
 //               <div>
-//                 <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+//                 <label htmlFor="name" className="block text-base font-medium text-gray-700">
 //                   Имя
 //                 </label>
 //                 <Input id="name" type="text" placeholder="Введите ваше имя" />
 //               </div>
 //             )}
 //             <div>
-//               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+//               <label htmlFor="email" className="block text-base font-medium text-gray-700">
 //                 Email
 //               </label>
 //               <Input id="email" type="email" placeholder="Введите ваш email" />
 //             </div>
 //             <div>
-//               <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+//               <label htmlFor="password" className="block text-base font-medium text-gray-700">
 //                 Пароль
 //               </label>
 //               <Input id="password" type="password" placeholder="Введите ваш пароль" />
 //             </div>
 //             {!isLogin && (
 //               <div>
-//                 <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
+//                 <label htmlFor="confirmPassword" className="block text-base font-medium text-gray-700">
 //                   Подтвердите пароль
 //                 </label>
 //                 <Input id="confirmPassword" type="password" placeholder="Повторите ваш пароль" />
@@ -52,7 +52,7 @@
 //           </form>
 //         </CardContent>
 //         <CardFooter className="text-center">
-//           <p className="text-sm text-gray-500">
+//           <p className="text-base text-gray-500">
 //             {isLogin ? "Нет аккаунта?" : "Уже есть аккаунт?"}{" "}
 //             <button
 //               type="button"
