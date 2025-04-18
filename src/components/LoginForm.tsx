@@ -79,7 +79,7 @@ import {
   SelectContent,
   SelectItem,
   SelectValue,
-} from "./ui/select";
+} from "@/components/ui/select";
 
 export default function AuthForms() {
   const [activeTab, setActiveTab] = useState("login");
@@ -126,6 +126,22 @@ export default function AuthForms() {
                     {level}
                   </SelectItem>
                 ))}
+              </SelectContent>
+            </Select>
+            <Select>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Где хочешь жить?" className='w-full' />
+              </SelectTrigger>
+              <SelectContent className='bg-white w-full'>
+                  <SelectItem key={0} value={"dorm"} className='w-full'>
+                    Общежитие
+                  </SelectItem>
+                  <SelectItem key={1} value={"flat"} className='w-full'>
+                    Квартира
+                  </SelectItem>
+                  <SelectItem key={2} value={"nomean"} className='w-full'>
+                    Не важно
+                  </SelectItem>
               </SelectContent>
             </Select>
             <Input placeholder="Интересы" className="my-4" />
