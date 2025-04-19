@@ -103,7 +103,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 
       {/* Mobile Menu Sheet */}
       <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-        <SheetContent side="left" className="w-64 bg-white z-10">
+        <SheetContent side="left" className="w-64 bg-white z-50">
           <SheetHeader>
             <SheetTitle className="flex items-center gap-2">
               <img src={dormBuddyLogo} alt="DormBuddy" className="w-10 h-10" />
@@ -116,7 +116,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>
               <Button
                 variant={isActive('/') ? "default" : "ghost"}
-                className="w-full justify-start cursor-pointer"
+                className="w-full justify-start cursor-pointer p-3"
               >
                 <Search className="mr-2 h-5 w-5" />
                 Поиск
@@ -125,7 +125,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             <Link to="/matches" onClick={() => setIsMobileMenuOpen(false)}>
               <Button
                 variant={isActive('/matches') ? "default" : "ghost"}
-                className="w-full justify-start cursor-pointer"
+                className="w-full justify-start cursor-pointer p-3"
               >
                 <Users className="mr-2 h-5 w-5" />
                 Совпадения
@@ -139,7 +139,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             <Link to="/profile" onClick={() => setIsMobileMenuOpen(false)}>
               <Button
                 variant={isActive('/profile') ? "default" : "ghost"}
-                className="w-full justify-start cursor-pointer"
+                className="w-full justify-start cursor-pointer p-3"
               >
                 <Settings className="mr-2 h-5 w-5" />
                 Профиль
@@ -148,7 +148,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             <Link to="/ai" onClick={() => setIsMobileMenuOpen(false)}>
               <Button
                 variant={isActive('/ai') ? "default" : "ghost"}
-                className="w-full justify-start cursor-pointer"
+                className="w-full justify-start cursor-pointer p-3"
               >
                 <BrainCircuit className="mr-2 h-5 w-5" />
                 CrocoAI
@@ -157,7 +157,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             <Link to="/sub" onClick={() => setIsMobileMenuOpen(false)}>
               <Button
                 variant={isActive('/sub') ? "default" : "ghost"}
-                className="w-full justify-start cursor-pointer"
+                className="w-full justify-start cursor-pointer p-3"
               >
                 <Crown className="mr-2 h-5 w-5" />
                 Подписка
@@ -165,7 +165,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             </Link>
             <Button
               variant="ghost"
-              className="w-full justify-start mt-auto cursor-pointer text-destructive hover:text-destructive/90 hover:bg-destructive/10"
+              className="w-full justify-start mt-auto cursor-pointer p-3 text-destructive hover:text-destructive/90 hover:bg-destructive/10"
               onClick={handleLogout}
             >
               <LogOut className="mr-2 h-5 w-5" />
