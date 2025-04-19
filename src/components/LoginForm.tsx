@@ -1,73 +1,3 @@
-// import { useState } from "react";
-// import { Input } from "@/components/ui/input";
-// import { Button } from "@/components/ui/button";
-// import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
-
-// export default function AuthForms() {
-//   const [isLogin, setIsLogin] = useState(true);
-
-//   const toggleForm = () => setIsLogin(!isLogin);
-
-//   return (
-//     <div className="flex items-center justify-center min-h-screen bg-gray-100">
-//       <Card className="w-full max-w-md p-6">
-//         <CardHeader>
-//           <CardTitle className="text-center text-2xl font-bold">
-//             {isLogin ? "Вход" : "Регистрация"}
-//           </CardTitle>
-//         </CardHeader>
-//         <CardContent>
-//           <form className="space-y-4">
-//             {!isLogin && (
-//               <div>
-//                 <label htmlFor="name" className="block text-base font-medium text-gray-700">
-//                   Имя
-//                 </label>
-//                 <Input id="name" type="text" placeholder="Введите ваше имя" />
-//               </div>
-//             )}
-//             <div>
-//               <label htmlFor="email" className="block text-base font-medium text-gray-700">
-//                 Email
-//               </label>
-//               <Input id="email" type="email" placeholder="Введите ваш email" />
-//             </div>
-//             <div>
-//               <label htmlFor="password" className="block text-base font-medium text-gray-700">
-//                 Пароль
-//               </label>
-//               <Input id="password" type="password" placeholder="Введите ваш пароль" />
-//             </div>
-//             {!isLogin && (
-//               <div>
-//                 <label htmlFor="confirmPassword" className="block text-base font-medium text-gray-700">
-//                   Подтвердите пароль
-//                 </label>
-//                 <Input id="confirmPassword" type="password" placeholder="Повторите ваш пароль" />
-//               </div>
-//             )}
-//             <Button type="submit" className="w-full">
-//               {isLogin ? "Войти" : "Зарегистрироваться"}
-//             </Button>
-//           </form>
-//         </CardContent>
-//         <CardFooter className="text-center">
-//           <p className="text-base text-gray-500">
-//             {isLogin ? "Нет аккаунта?" : "Уже есть аккаунт?"}{" "}
-//             <button
-//               type="button"
-//               onClick={toggleForm}
-//               className="text-blue-500 hover:underline"
-//             >
-//               {isLogin ? "Зарегистрироваться" : "Войти"}
-//             </button>
-//           </p>
-//         </CardFooter>
-//       </Card>
-//     </div>
-//   );
-// }
-
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -80,9 +10,36 @@ import {
   SelectItem,
   SelectValue,
 } from "@/components/ui/select";
+import { loginUser } from '@/lib/requests';
+import { useCookies } from "react-cookie";
+import { useNavigate } from 'react-router-dom';
 
 export default function AuthForms() {
   const [activeTab, setActiveTab] = useState("login");
+  const [, setCookie] = useCookies(["TOKEN"]);
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
+  const [email, setEmail] = useState("");
+
+  const navigate = useNavigate();
+
+  const [user, setUser] = useState({
+    "name": "",
+    "age": 0,
+    "gender": "",
+    "occupation": "",
+    "avatar": "",
+    "bio": "",
+    "interests": [],
+    "cleanliness_level": 1,
+    "sleep_habits": "",
+    "rent_budget": 0,
+    "location": "",
+    "smoking_preference": "",
+    "pet_preference": ""
+  });
 
   return (
     <div className="flex items-center justify-center h-screen">
@@ -96,20 +53,33 @@ export default function AuthForms() {
 
         {activeTab === "login" ? (
           <form className="mt-4">
-            <Input placeholder="Логин" className="mb-4" />
-            <Input type="password" placeholder="Пароль" className="mb-4" />
-            <Button type="submit" className="w-full">
+            <Input placeholder="Логин" className="mb-4" onChange={(evt) => setUsername(evt.target.value)} />
+            <Input type="password" placeholder="Пароль" className="mb-4" onChange={(evt) => setPassword(evt.target.value)} />
+            <Button type="submit" className="w-full" onClick={() => {
+              if (username && password) {
+                try {
+                  loginUser(username, password)
+                  .then((token) => {
+                    setCookie('TOKEN', token.access_token);
+                    navigate('/');
+                  })
+                } catch (error) {
+                  console.log(error);
+                }
+              }
+            }}>
               Войти
             </Button>
           </form>
         ) : (
           <form className="mt-4">
-            <Input placeholder="Логин" className="mb-4" />
-            <Input type="password" placeholder="Пароль" className="mb-4" />
+            <Input placeholder="Логин" className="mb-4" onChange={(evt) => setLogin(evt.target.value)} />
+            <Input type="password" placeholder="Пароль" className="mb-4" onChange={(evt) => setPassword(evt.target.value)} />
             <Input
               type="password"
               placeholder="Повторите пароль"
               className="mb-4"
+              onChange={(evt) => setRepeatPassword(evt.target.value)}
             />
             <Input placeholder="Информация о себе" className="mb-4" />
             <Input placeholder="Возраст" className="mb-4" />

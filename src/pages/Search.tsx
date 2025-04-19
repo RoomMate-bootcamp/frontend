@@ -145,7 +145,7 @@ export default function Search() {
               className="rounded-full h-12 w-12 cursor-pointer"
               onClick={() => handleSwipe("left")}
             >
-              <X className="h-6 w-6 text-red-500" />
+              <X className="h-16 w-16 text-red-500" />
             </Button>
 
             <Button
@@ -154,13 +154,13 @@ export default function Search() {
               className="rounded-full h-12 w-12 cursor-pointer"
               onClick={() => handleSwipe("right")}
             >
-              <Heart className="h-6 w-6 text-green-500" />
+              <Heart className="h-16 w-16 text-green-500" />
             </Button>
           </CardFooter>
         </Card>
 
         <div className="mt-4 text-center text-gray-500">
-          <p>Свайпните вправо, если хотите жить вместе</p>
+          <p>Нажмите на правую кнопку, если хотите жить вместе</p>
         </div>
       </div>
     </Layout>
