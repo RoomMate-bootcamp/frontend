@@ -16,17 +16,20 @@ COPY . .
 # Build the app
 RUN npm run build
 
-# Production stage
-FROM nginx:alpine
+# Serve stage - using lightweight http server
+FROM node:20-alpine
 
-# Copy built files from build stage to nginx
-COPY --from=build /app/build /usr/share/nginx/html
+# Set working directory
+WORKDIR /app
 
-# Copy nginx configuration if you have custom config
-# COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Install serve
+RUN npm install -g serve
 
-# Expose port
-EXPOSE 80
+# Copy built app from build stage
+COPY --from=build /app/build ./build
 
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Expose port 3005
+EXPOSE 3005
+
+# Start serving the app
+CMD ["serve", "-s", "build", "-l", "3005"]
