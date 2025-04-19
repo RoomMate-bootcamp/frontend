@@ -392,7 +392,7 @@ export default function Search() {
                   onClick={() => handleSwipe("left")}
                   disabled={likeInProgress}
                 >
-                  <X className="h-6 w-6 text-destructive" />
+                  <X className="h-6 w-6 text-destructive text-red-500" />
                 </Button>
 
                 <Button
@@ -549,7 +549,7 @@ export default function Search() {
                   onClick={() => handleSwipe("left")}
                   disabled={likeInProgress}
                 >
-                  <X className="h-6 w-6 text-destructive" />
+                  <X className="h-6 w-6 text-destructive text-red-500" />
                 </Button>
 
                 <Button
