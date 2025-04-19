@@ -60,6 +60,7 @@ export default function Search() {
       return;
 
     const currentRoommate = potentialRoommates[currentIndex];
+    
 
     if (direction === "right") {
       try {
@@ -177,6 +178,170 @@ export default function Search() {
       <div className="flex flex-col items-center max-w-md mx-auto">
         <h2 className="text-2xl font-bold mb-4 md:mb-6">Найди соседа</h2>
 
+        <div className="relative w-full h-full">
+          {potentialRoommates
+            .slice(currentIndex + 1, currentIndex + 6) // Показываем 5-8 карточек под текущей
+            .reverse() // Обратный порядок, чтобы верхняя карта была ближе
+            .map((roommate, index) => (
+              <Card
+                className="w-full h-[75vh] opacity-50 absolute w-full bg-white"
+                key={roommate.id}
+                style={{
+                  transform: `rotate(${(index - 2) * 3}deg)`, // Угол наклона для каждой карты
+                  zIndex: -index, // Карты под текущей
+                }}
+              >
+                <CardHeader className="flex flex-row items-center justify-between">
+                  <div>
+                    <CardTitle>
+                      {roommate.name || "Без имени"}
+                      {roommate.age ? `, ${roommate.age}` : ""}
+                    </CardTitle>
+                    <CardDescription>
+                      {roommate.occupation || "Не указано"}
+                    </CardDescription>
+                  </div>
+                  <Avatar className="h-12 w-12 avatar-ring">
+                    <AvatarImage
+                      src={roommate.avatar || "/api/placeholder/100/100"}
+                      alt={roommate.name || "Пользователь"}
+                    />
+                    <AvatarFallback>
+                      {roommate.name?.slice(0, 2) || "?"}
+                    </AvatarFallback>
+                  </Avatar>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div>
+                      <h3 className="font-medium">О себе:</h3>
+                      <p className="text-gray-600">
+                        {roommate.bio || "Информация о себе не указана"}
+                      </p>
+                    </div>
+
+                    <div>
+                      <h3 className="font-medium">Интересы:</h3>
+                      <div className="flex flex-wrap gap-2 mt-1">
+                        {roommate.interests &&
+                        roommate.interests.length > 0 ? (
+                          roommate.interests.map((interest, i) => (
+                            <Badge key={i} variant="secondary">
+                              {interest}
+                            </Badge>
+                          ))
+                        ) : (
+                          <p className="text-gray-500">Интересы не указаны</p>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <h3 className="font-medium">Чистоплотность:</h3>
+                        <div className="flex mt-1">
+                          {[1, 2, 3, 4, 5].map((level) => (
+                            <div
+                              key={level}
+                              className={`w-5 h-5 rounded-full mr-1 ${
+                                roommate.cleanliness_level &&
+                                level <= roommate.cleanliness_level
+                                  ? "bg-green-500"
+                                  : "bg-gray-200"
+                              }`}
+                            />
+                          ))}
+                        </div>
+                      </div>
+
+                      <div>
+                        <h3 className="font-medium">Бюджет:</h3>
+                        <p className="text-gray-600">
+                          {roommate.rent_budget
+                            ? `${roommate.rent_budget} ₽/мес`
+                            : "Не указан"}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <h3 className="font-medium">Сон:</h3>
+                        <p className="text-gray-600">
+                          {roommate.sleep_habits || "Не указано"}
+                        </p>
+                      </div>
+
+                      <div>
+                        <h3 className="font-medium">Район:</h3>
+                        <p className="text-gray-600">
+                          {roommate.location || "Не указан"}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <h3 className="font-medium">Курение:</h3>
+                        <p className="text-gray-600">
+                          {roommate.smoking_preference || "Не указано"}
+                        </p>
+                      </div>
+
+                      <div>
+                        <h3 className="font-medium">Животные:</h3>
+                        <p className="text-gray-600">
+                          {roommate.pet_preference || "Не указано"}
+                        </p>
+                      </div>
+                    </div>
+
+                    <Button
+                      variant="outline"
+                      className="w-full"
+                      onClick={checkCompatibility}
+                      disabled={loadingCompatibility}
+                    >
+                      {loadingCompatibility ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Анализируем совместимость...
+                        </>
+                      ) : (
+                        "Проверить совместимость"
+                      )}
+                    </Button>
+                  </div>
+                </CardContent>
+                <CardFooter className="flex justify-between">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="rounded-full h-12 w-12 cursor-pointer"
+                    onClick={() => handleSwipe("left")}
+                    disabled={likeInProgress}
+                  >
+                    <X className="h-6 w-6 text-destructive text-red-500" />
+                  </Button>
+
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="rounded-full h-12 w-12 cursor-pointer"
+                    onClick={() => handleSwipe("right")}
+                    disabled={likeInProgress}
+                  >
+                    {likeInProgress ? (
+                      <Loader2 className="h-6 w-6 animate-spin" />
+                    ) : (
+                      <Heart className="h-6 w-6 text-green-500" />
+                    )}
+                  </Button>
+                </CardFooter>
+              </Card>
+            ))}
+        </div>
+
         {/* Оборачиваем карточку в обработчик свайпов */}
         <motion.div
           className="w-full bg-white"
@@ -184,14 +349,14 @@ export default function Search() {
           style={{
             x: swipeStyle.x,
             rotate: swipeStyle.rotate,
-            opacity: 1 - Math.min(Math.abs(swipeStyle.x) / 300, 1)
+            opacity: 1 - Math.min(Math.abs(swipeStyle.x) / 300, 1),
           }}
           animate={isSwiping ? {} : { x: 0, rotate: 0, opacity: 1 }}
           exit={{ x: swipeStyle.x, opacity: 0 }} // Анимация исчезновения
           transition={{ type: "spring", stiffness: 300, damping: 20 }}
         >
           {showCompatibility && compatibilityData ? (
-            <Card className="w-full animate-in">
+            <Card className="w-full animate-in bg-white">
               <CardHeader>
                 <CardTitle className="flex justify-between items-center">
                   Совместимость
@@ -253,7 +418,7 @@ export default function Search() {
               </CardFooter>
             </Card>
           ) : (
-            <Card className="w-full animate-in">
+            <Card className="w-full animate-in bg-white">
               <CardHeader className="flex flex-row items-center justify-between">
                 <div>
                   <CardTitle>
