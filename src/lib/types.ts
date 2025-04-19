@@ -11,29 +11,29 @@ export interface User {
   avatar: string;
   bio: string;
   interests: string[];
-  cleanlinessLevel: number;
-  sleepHabits: string;
-  rentBudget: number;
+  cleanliness_level: number;
+  sleep_habits: string;
+  rent_budget: number;
   location: string;
-  smokingPreference: string;
-  petPreference: string;
+  smoking_preference: string;
+  pet_preference: string;
   username?: string;
   email?: string;
-  isActive?: boolean;
+  is_active?: boolean;
 }
 
 export interface Message {
   id: string;
-  senderId: string;
-  receiverId: string;
+  sender_id: string;
+  receiver_id: string;
   content: string;
   timestamp: Date;
 }
 
 export interface Match {
   id: string | number;
-  userId1?: string | number;
-  userId2?: string | number;
+  user_id1?: string | number;
+  user_id2?: string | number;
   user1_id?: number;
   user2_id?: number;
   timestamp: Date | string;
