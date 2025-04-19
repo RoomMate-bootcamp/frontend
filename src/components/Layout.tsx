@@ -101,7 +101,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 
       {/* Mobile Menu Sheet */}
       <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-        <SheetContent side="left" className="w-64 bg-white">
+        <SheetContent side="left" className="w-64 bg-white z-10">
           <SheetHeader>
             <SheetTitle className="flex items-center gap-2">
               <img src={logo} alt="Логотип" className="w-10 h-8" />
@@ -173,7 +173,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         </SheetContent>
       </Sheet>
 
-      <div className="flex flex-1">
+      <div className="flex flex-1 z-10">
         {/* Desktop Sidebar */}
         <div className="hidden md:flex flex-col w-64 border-r bg-white p-4 h-screen sticky top-0">
           <div className="mb-8">
