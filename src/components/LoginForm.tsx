@@ -9,6 +9,9 @@ import { useNavigate } from 'react-router-dom';
 import { Loader2 } from "lucide-react";
 import { Label } from "@/components/ui/label";
 
+// Импортируем логотип DormBuddy
+import dormBuddyLogo from "../assets/dormbuddy-logo.svg";
+
 export default function AuthForms() {
   const [activeTab, setActiveTab] = useState("login");
   const [, setCookie] = useCookies(["TOKEN"]);
@@ -107,7 +110,12 @@ export default function AuthForms() {
     <div className="flex items-center justify-center min-h-screen bg-gray-50 p-4">
       <Card className="w-full max-w-md shadow-md">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-indigo-600">DormBuddy</CardTitle>
+          <div className="flex justify-center mb-3">
+            <img src={dormBuddyLogo} alt="DormBuddy" className="w-16 h-16" />
+          </div>
+          <CardTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-indigo-600">
+            DormBuddy
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <Tabs value={activeTab} onValueChange={setActiveTab}>

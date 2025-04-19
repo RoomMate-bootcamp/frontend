@@ -12,12 +12,14 @@ import {
   Bell,
 } from "lucide-react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import logo from "../lib/icons/logo.png";
 import { useCookies } from 'react-cookie';
 import { Badge } from "./ui/badge";
 import { getNotifications } from "@/lib/requests";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { getUserProfile } from "@/lib/requests";
+
+// Импортируем логотип DormBuddy
+import dormBuddyLogo from "../assets/dormbuddy-logo.svg";
 
 export default function Layout({ children }: { children: ReactNode }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -72,7 +74,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     <div className="flex flex-col min-h-screen bg-gray-50">
       <header className="md:hidden flex items-center justify-between p-4 bg-white border-b shadow-sm">
         <h1 className="text-2xl font-bold flex gap-2 items-center">
-          <img src={logo} alt="Логотип" className="w-12 h-10" />
+          <img src={dormBuddyLogo} alt="DormBuddy" className="w-10 h-10" />
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-indigo-600">
             DormBuddy
           </span>
@@ -104,7 +106,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         <SheetContent side="left" className="w-64 bg-white z-10">
           <SheetHeader>
             <SheetTitle className="flex items-center gap-2">
-              <img src={logo} alt="Логотип" className="w-10 h-8" />
+              <img src={dormBuddyLogo} alt="DormBuddy" className="w-10 h-10" />
               <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-indigo-600">
                 DormBuddy
               </span>
@@ -178,12 +180,12 @@ export default function Layout({ children }: { children: ReactNode }) {
         <div className="hidden md:flex flex-col w-64 border-r bg-white p-4 h-screen sticky top-0">
           <div className="mb-8">
             <h1 className="text-2xl font-bold flex items-center gap-2">
-              <img src={logo} alt="Логотип" className="w-12 h-10" />
+              <img src={dormBuddyLogo} alt="DormBuddy" className="w-12 h-12" />
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-indigo-600">
                 DormBuddy
               </span>
             </h1>
-            <p className="text-gray-500 text-sm mt-1">Найди идеального соседа</p>
+            <p className="text-gray-500 text-sm mt-1">Как найти соседа?</p>
           </div>
 
           {userProfile && (

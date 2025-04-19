@@ -29,6 +29,7 @@ import {
   Loader2,
   User,
   Users,
+  SkipForward,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { ProfileUpdate } from "@/lib/types";
@@ -136,6 +137,28 @@ export default function Onboarding() {
     }));
   };
 
+  // Skip onboarding completely
+  const skipOnboarding = async () => {
+    try {
+      setIsSubmitting(true);
+      setError("");
+
+      // Set minimal required profile info
+      const minimalProfile: ProfileUpdate = {
+        name: profile.name || "Пользователь",
+        onboarding_completed: true // Mark onboarding as completed despite skipping
+      };
+
+      await updateUserProfile(cookies.TOKEN, minimalProfile);
+      navigate("/");
+    } catch (error) {
+      console.error("Error skipping onboarding:", error);
+      setError("Произошла ошибка. Пожалуйста, попробуйте еще раз.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   // Check if the current step is valid
   const isCurrentStepValid = () => {
     const currentStepObj = steps[currentStep];
@@ -199,7 +222,8 @@ export default function Onboarding() {
         ...profile,
         age: profile.age ? Number(profile.age) : undefined,
         cleanliness_level: profile.cleanliness_level ? Number(profile.cleanliness_level) : undefined,
-        rent_budget: profile.rent_budget ? Number(profile.rent_budget) : undefined
+        rent_budget: profile.rent_budget ? Number(profile.rent_budget) : undefined,
+        onboarding_completed: true // Mark onboarding as completed
       };
 
       await updateUserProfile(cookies.TOKEN, processedProfile);
@@ -535,8 +559,18 @@ export default function Onboarding() {
               <CardTitle className="text-xl">
                 {steps[currentStep].name}
               </CardTitle>
-              <CardDescription>
-                Шаг {currentStep + 1} из {steps.length}
+              <CardDescription className="flex justify-between items-center">
+                <span>Шаг {currentStep + 1} из {steps.length}</span>
+                <Button
+                  variant="link"
+                  size="sm"
+                  className="text-gray-500 flex items-center gap-1 p-0 h-auto"
+                  onClick={skipOnboarding}
+                  disabled={isSubmitting}
+                >
+                  <SkipForward className="h-3 w-3" />
+                  <span>Пропустить настройку</span>
+                </Button>
               </CardDescription>
             </div>
           </div>
@@ -548,7 +582,7 @@ export default function Onboarding() {
             type="button"
             variant="outline"
             onClick={prevStep}
-            disabled={currentStep === 0}
+            disabled={currentStep === 0 || isSubmitting}
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Назад
@@ -558,7 +592,7 @@ export default function Onboarding() {
             <Button
               type="button"
               onClick={nextStep}
-              disabled={!isCurrentStepValid()}
+              disabled={!isCurrentStepValid() || isSubmitting}
             >
               Далее
               <ArrowRight className="ml-2 h-4 w-4" />
