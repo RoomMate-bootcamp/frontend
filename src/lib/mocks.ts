@@ -64,6 +64,22 @@ export const mockUsers: User[] = [
     location: 'Технопарк',
     smokingPreference: 'Не курю',
     petPreference: 'Без животных'
+  },
+  {
+    id: 'ai',
+    name: 'CrocoAI',
+    age: 0,
+    gender: 'Не указано',
+    occupation: 'ИИ-ассистент',
+    avatar: '/api/placeholder/100/100',
+    bio: 'Я ваш персональный AI-помощник для вопросов о совместном проживании и поиске соседей.',
+    interests: ['Ответы на вопросы', 'Советы по совместному проживанию', 'Рекомендации'],
+    cleanlinessLevel: 5,
+    sleepHabits: 'Всегда доступен',
+    rentBudget: 0,
+    location: 'Везде',
+    smokingPreference: 'Не курит',
+    petPreference: 'Нейтрально'
   }
 ];
 
@@ -106,6 +122,15 @@ export const mockMessages: Record<string, Message[]> = {
       receiverId: '3',
       content: 'Привет! Я тоже люблю искусство. Может быть, мы могли бы найти квартиру вместе?',
       timestamp: new Date(2025, 3, 10, 18, 20)
+    }
+  ],
+  'ai': [
+    {
+      id: 'msg4',
+      senderId: 'ai',
+      receiverId: 'current',
+      content: 'Привет! Я CrocoAI, ваш персональный помощник по вопросам совместного проживания. Чем я могу вам помочь сегодня?',
+      timestamp: new Date(2025, 3, 18, 12, 0)
     }
   ]
 };
