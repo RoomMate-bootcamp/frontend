@@ -1,12 +1,19 @@
 version: '3.8'
 
 services:
-  react-prod:
+  frontend:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: react-prod
+    container_name: dormbuddy-frontend
     ports:
-      - "3005:80"
-    environment:
-      - NODE_ENV=production
+      - "3005:3005"
+    restart: always
+    networks:
+      - dormbuddy-network
+      - default
+
+networks:
+  dormbuddy-network:
+    external: true
+  default:
