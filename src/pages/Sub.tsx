@@ -20,7 +20,7 @@ export default function Sub() {
         </li>
       </ul>
       <div className="w-full text-center my-7 text-2xl">
-        ВСЕГО ЗА <span className="line-through">300</span> 250 РУБЛЕЙ!!!
+        ВСЕГО ЗА <span className="line-through">800</span> 450 РУБЛЕЙ!!!
       </div>
       <div className="w-full flex justify-center">
         <Button className='cursor-pointer'>
